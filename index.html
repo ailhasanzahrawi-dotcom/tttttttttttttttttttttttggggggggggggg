@@ -1,0 +1,701 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الموقع الشخصي لمطور برامج ومصمم مواقع ويب">
+    <title>مطور | الموقع الشخصي</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --red: #ff3030;
+            --red-dark: #d71920;
+            --bg: #0b0b0e;
+            --card: #151519;
+            --text: #ffffff;
+            --muted: #a0a0a8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Navbar */
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11,11,14,.92);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #222;
+        }
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            color: var(--red);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ddd;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--red);
+            background: none;
+            border: none;
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            background:
+            radial-gradient(circle at 80% 50%, rgba(255,48,48,.13), transparent 35%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h3 {
+            color: var(--red);
+            font-size: 22px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(35px, 6vw, 65px);
+            font-weight: 900;
+            line-height: 1.4;
+            margin: 15px 0;
+        }
+
+        .hero-text h1 span {
+            color: var(--red);
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            line-height: 2;
+            font-size: 17px;
+            max-width: 600px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: .3s;
+            display: inline-block;
+            border: 1px solid var(--red);
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-outline {
+            color: var(--red);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px #ff303044;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-box {
+            width: 330px;
+            height: 330px;
+            border: 3px solid var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            color: var(--red);
+            background: #17171b;
+            box-shadow: 0 0 60px #ff303033;
+        }
+
+        /* General Sections */
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            font-weight: 900;
+        }
+
+        .section-title h2 span {
+            color: var(--red);
+        }
+
+        .section-title p {
+            color: var(--muted);
+            margin-top: 10px;
+        }
+
+        /* About */
+
+        .about-content {
+            background: var(--card);
+            border: 1px solid #292929;
+            padding: 40px;
+            border-radius: 15px;
+            line-height: 2.2;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .about-content strong {
+            color: var(--red);
+        }
+
+        /* Skills */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #292929;
+            text-align: center;
+            transition: .3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--red);
+            transform: translateY(-8px);
+        }
+
+        .skill-card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Projects */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #292929;
+            transition: .3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--red);
+        }
+
+        .project-img {
+            height: 180px;
+            background: linear-gradient(135deg, #450b0b, #ff3030);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 65px;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info p {
+            color: var(--muted);
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .project-info a {
+            color: var(--red);
+        }
+
+        /* Contact */
+
+        .contact-box {
+            max-width: 650px;
+            margin: auto;
+            background: var(--card);
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #292929;
+        }
+
+        .contact-box input,
+        .contact-box textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #0b0b0e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .contact-box input:focus,
+        .contact-box textarea:focus {
+            border-color: var(--red);
+        }
+
+        .contact-box textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .contact-box button {
+            width: 100%;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #292929;
+            color: var(--muted);
+        }
+
+        footer span {
+            color: var(--red);
+        }
+
+        /* Responsive */
+
+        @media(max-width: 850px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .profile-box {
+                width: 250px;
+                height: 250px;
+                font-size: 80px;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 75px;
+                right: 0;
+                width: 100%;
+                background: #151519;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                gap: 20px;
+                display: none;
+                border-bottom: 2px solid var(--red);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .about-content,
+            .contact-box {
+                padding: 22px;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="#home" class="logo">DEV<span>.</span></a>
+
+            <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة">☰</button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#about">محمد حسن</a></li>
+                <li><a href="#skills">مهاراتي</a></li>
+                <li><a href="#projects">أعمالي</a></li>
+                <li><a href="#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero -->
+
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+
+            <div class="hero-text">
+                <h3>مرحباً بك في موقعي</h3>
+
+                <h1>
+                    أنا مطور <span>برمجيات</span><br>
+                    أصنع المستقبل بالكود
+                </h1>
+
+                <p>
+                    أعمل على تطوير المواقع والتطبيقات الرقمية
+                    باستخدام أحدث التقنيات، وأسعى دائماً
+                    لتحويل الأفكار إلى مشاريع إبداعية واحترافية.
+                </p>
+
+                <div class="buttons">
+                    <a href="#projects" class="btn btn-primary">شاهد أعمالي</a>
+                    <a href="#contact" class="btn btn-outline">تواصل معي</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="profile-box">👨‍💻</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+
+<section id="about">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>من <span>أنا؟</span></h2>
+            <p>تعرف أكثر على خبراتي وشغفي بالبرمجة</p>
+        </div>
+
+        <div class="about-content">
+            <p>
+                أنا مطور برمجيات مهتم بتصميم وتطوير المواقع والتطبيقات.
+                أمتلك شغفاً كبيراً بعالم التكنولوجيا والبرمجة،
+                وأسعى إلى تقديم حلول رقمية تجمع بين الأداء العالي
+                والتصميم الجميل وتجربة المستخدم المميزة.
+                <br>
+                <strong>هدفي هو تحويل أفكارك إلى واقع رقمي.</strong>
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Skills -->
+
+<section id="skills">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>مهاراتي <span>البرمجية</span></h2>
+            <p>التقنيات والأدوات التي أستخدمها</p>
+        </div>
+
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <div class="icon">🌐</div>
+                <h3>HTML5</h3>
+                <p>بناء صفحات الويب وتنظيم المحتوى.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">🎨</div>
+                <h3>CSS3</h3>
+                <p>تصميم واجهات جذابة ومتجاوبة.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">⚡</div>
+                <h3>JavaScript</h3>
+                <p>إضافة التفاعلات والوظائف الذكية.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">🐍</div>
+                <h3>Python</h3>
+                <p>تطوير البرامج وأتمتة المهام.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">🗄️</div>
+                <h3>Databases</h3>
+                <p>إدارة قواعد البيانات وتنظيم المعلومات.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="icon">💻</div>
+                <h3>Web Development</h3>
+                <p>تطوير مواقع ويب متكاملة.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Projects -->
+
+<section id="projects">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>أحدث <span>أعمالي</span></h2>
+            <p>مجموعة من المشاريع البرمجية</p>
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-img">🛒</div>
+                <div class="project-info">
+                    <h3>متجر إلكتروني</h3>
+                    <p>تصميم متجر إلكتروني عصري ومتجاوب.</p>
+                    <a href="#contact">عرض المشروع ←</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img">📱</div>
+                <div class="project-info">
+                    <h3>تطبيق إدارة المهام</h3>
+                    <p>تطبيق لتنظيم المهام اليومية وإدارتها.</p>
+                    <a href="#contact">عرض المشروع ←</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img">💼</div>
+                <div class="project-info">
+                    <h3>موقع شخصي</h3>
+                    <p>موقع احترافي للتعريف بالمطور وأعماله.</p>
+                    <a href="#contact">عرض المشروع ←</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+
+<section id="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>تواصل <span>معي</span></h2>
+            <p>هل لديك مشروع؟ دعنا نعمل معاً</p>
+        </div>
+
+        <form class="contact-box" id="contactForm">
+
+            <input type="text" id="name" placeholder="الاسم الكامل" required>
+
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+
+            <input type="text" id="subject" placeholder="موضوع الرسالة" required>
+
+            <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+
+            <button type="submit" class="btn btn-primary">
+                إرسال الرسالة
+            </button>
+
+        </form>
+
+    </div>
+</section>
+
+<!-- Footer -->
+
+<footer>
+    <p>
+        جميع الحقوق محفوظة © 2026 |
+        <span>DEV</span> - تصميم وتطوير بكل شغف ❤️
+    </p>
+</footer>
+
+<script>
+
+    // Mobile Menu
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        menuBtn.textContent =
+            navLinks.classList.contains("active") ? "✕" : "☰";
+    });
+
+    // Close Menu After Clicking
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+            menuBtn.textContent = "☰";
+        });
+    });
+
+    // Contact Form
+
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
+
+        const phone = "9647XXXXXXXXX";
+
+        const text = `الاسم: ${name}
+البريد: ${email}
+الموضوع: ${subject}
+الرسالة: ${message}`;
+
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+        window.open(url, "_blank");
+    });
+
+</script>
+
+</body>
+</html>
+```
