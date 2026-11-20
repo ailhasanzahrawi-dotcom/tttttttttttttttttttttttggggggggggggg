@@ -1,0 +1,763 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محمد حسن | متجر البرامج</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+:root {
+    --main: #16a34a;
+    --dark: #08752e;
+    --bg: #f4f8f5;
+    --card: #ffffff;
+    --text: #17251b;
+    --muted: #718078;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: .3s;
+}
+
+body.dark {
+    --bg: #101b14;
+    --card: #1b2b20;
+    --text: #f0fff3;
+    --muted: #a5b9aa;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+/* شاشة تسجيل الدخول */
+
+#loginPage {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg,#064e26,#16a34a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.login-box {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 50px #0004;
+}
+
+.login-box h1 {
+    color: #08752e;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.login-box input:focus {
+    border-color: var(--main);
+}
+
+.login-box button {
+    background: var(--main);
+    color: white;
+    padding: 14px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 17px;
+    margin-top: 15px;
+}
+
+.login-box button:hover {
+    background: var(--dark);
+}
+
+/* القائمة الجانبية */
+
+.sidebar {
+    position: fixed;
+    right: -270px;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    background: var(--card);
+    z-index: 1000;
+    padding: 25px;
+    transition: .3s;
+    box-shadow: -5px 0 20px #0001;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar h2 {
+    color: var(--main);
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 7px 0;
+}
+
+.sidebar a:hover {
+    background: var(--main);
+    color: white;
+}
+
+.close {
+    float: left;
+    font-size: 25px;
+    background: none;
+    color: var(--text);
+}
+
+/* الشريط العلوي */
+
+header {
+    background: var(--card);
+    padding: 15px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px #0001;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--main);
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: var(--main);
+    color: white;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+/* المحتوى */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.hero {
+    margin-top: 35px;
+    padding: 65px 35px;
+    background: linear-gradient(120deg,#064e26,#16a34a);
+    border-radius: 22px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: clamp(27px,4vw,43px);
+    margin-bottom: 18px;
+}
+
+.hero p {
+    line-height: 2;
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.hero button {
+    margin-top: 20px;
+    padding: 13px 25px;
+    border-radius: 10px;
+    background: white;
+    color: #08752e;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.hero img {
+    width: 260px;
+    max-width: 40%;
+    border-radius: 20px;
+}
+
+/* الساعة والتاريخ */
+
+.datetime {
+    background: var(--card);
+    padding: 17px;
+    margin-top: 25px;
+    border-radius: 14px;
+    text-align: center;
+    color: var(--main);
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 3px 12px #0001;
+}
+
+section {
+    padding: 55px 0 15px;
+}
+
+.section-title {
+    font-size: 27px;
+    margin-bottom: 25px;
+}
+
+.section-title span {
+    color: var(--main);
+}
+
+/* بطاقات المنتجات */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+    gap: 22px;
+}
+
+.product {
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #0001;
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-7px);
+}
+
+.product img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 18px;
+}
+
+.product-info h3 {
+    margin-bottom: 12px;
+}
+
+.product-info p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.price {
+    display: block;
+    color: var(--main);
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 9px;
+    color: white;
+    background: var(--main);
+    font-size: 15px;
+}
+
+.buy-btn:hover {
+    background: var(--dark);
+}
+
+/* الخدمات */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+}
+
+.service {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 15px #0001;
+}
+
+.service .emoji {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.service h3 {
+    color: var(--main);
+    margin-bottom: 10px;
+}
+
+.service p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* التواصل */
+
+.contact {
+    background: var(--card);
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.contact p {
+    color: var(--muted);
+    line-height: 2;
+    margin: 10px;
+}
+
+.contact a {
+    display: inline-block;
+    background: var(--main);
+    color: white;
+    padding: 13px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+footer {
+    margin-top: 60px;
+    background: #064e26;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    line-height: 2;
+}
+
+/* زر الصعود */
+
+#topBtn {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    width: 48px;
+    height: 48px;
+    background: var(--main);
+    color: white;
+    border-radius: 50%;
+    font-size: 23px;
+    display: none;
+    z-index: 500;
+}
+
+/* تجاوب الشاشات */
+
+@media(max-width:650px) {
+    header {
+        padding: 13px 4%;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .hero img {
+        max-width: 100%;
+        width: 220px;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .header-buttons {
+        gap: 5px;
+    }
+
+    .icon-btn {
+        padding: 9px 11px;
+    }
+
+    .section-title {
+        font-size: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- تسجيل الدخول -->
+
+<div id="loginPage">
+    <div class="login-box">
+        <h1>🌿APP STOR</h1>
+        <p>مرحباً بك في متجر البرامج والخدمات</p>
+
+        <input type="text" id="fullName"
+        placeholder="أدخل اسمك الكامل">
+
+        <input type="text" id="username"
+        placeholder="أدخل اسم المستخدم">
+
+        <button onclick="login()">تسجيل الدخول</button>
+        <p id="error" style="color:red;margin-top:15px"></p>
+    </div>
+</div>
+
+<!-- القائمة الجانبية -->
+
+<div class="sidebar" id="sidebar">
+    <button class="close" onclick="toggleMenu()">✖</button>
+    <h2>🌿 القائمة</h2>
+
+    <a href="#home" onclick="toggleMenu()">🏠 الرئيسية</a>
+    <a href="#products" onclick="toggleMenu()">💻 البرامج</a>
+    <a href="#services" onclick="toggleMenu()">⚙️ الخدمات</a>
+    <a href="#contact" onclick="toggleMenu()">📞 التواصل</a>
+    <a href="#" onclick="logout()">🚪 تسجيل الخروج</a>
+</div>
+
+<!-- الشريط العلوي -->
+
+<header>
+    <div class="logo">🌿 محمد حسن</div>
+
+    <div class="header-buttons">
+        <button class="icon-btn" onclick="toggleMenu()">☰</button>
+        <button class="icon-btn" onclick="toggleDark()" id="themeBtn">🌙</button>
+    </div>
+</header>
+
+<main class="container" id="mainPage" style="display:none">
+
+    <!-- الرئيسية -->
+
+    <div class="hero" id="home">
+        <div>
+            <h1>مرحباً بك في متجر محمد حسن</h1>
+
+            <p>
+                عالم البرمجة والتكنولوجيا بين يديك.
+                نوفر لك أفضل البرامج والحلول الرقمية
+                والتصاميم الاحترافية بأسعار مناسبة.
+            </p>
+
+            <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+                اكتشف منتجاتنا الآن
+            </button>
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600"
+        alt="البرمجة وتطوير البرامج">
+    </div>
+
+    <!-- الساعة والتاريخ -->
+
+    <div class="datetime">
+        🕒 الساعة: <span id="clock">00:00:00</span>
+        <br>
+        📅 التاريخ: <span id="date"></span>
+    </div>
+
+    <!-- المنتجات -->
+
+    <section id="products">
+        <h2 class="section-title">💻 أحدث <span>البرامج</span></h2>
+
+        <div class="products">
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
+                alt="برنامج إدارة">
+                <div class="product-info">
+                    <h3>برنامج إدارة الأعمال</h3>
+                    <p>برنامج احترافي لإدارة المشاريع والأعمال وتنظيم البيانات.</p>
+                    <span class="price">25$</span>
+                    <button class="buy-btn" onclick="buy('برنامج إدارة الأعمال')">شراء الآن</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"
+                alt="برنامج محاسبة">
+                <div class="product-info">
+                    <h3>برنامج المحاسبة</h3>
+                    <p>نظام لتنظيم الحسابات والمبيعات والمصروفات.</p>
+                    <span class="price">30$</span>
+                    <button class="buy-btn" onclick="buy('برنامج المحاسبة')">شراء الآن</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600"
+                alt="برنامج تصميم">
+                <div class="product-info">
+                    <h3>خدمات تصميم المواقع</h3>
+                    <p>تصميم مواقع إلكترونية احترافية ومتجاوبة مع جميع الأجهزة.</p>
+                    <span class="price">50$</span>
+                    <button class="buy-btn" onclick="buy('خدمات تصميم المواقع')">شراء الآن</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600"
+                alt="تطوير التطبيقات">
+                <div class="product-info">
+                    <h3>تطوير التطبيقات</h3>
+                    <p>برمجة تطبيقات وحلول رقمية حسب طلب العميل.</p>
+                    <span class="price">40$</span>
+                    <button class="buy-btn" onclick="buy('تطوير التطبيقات')">شراء الآن</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- الخدمات -->
+
+    <section id="services">
+        <h2 class="section-title">⚙️ خدماتنا <span>الاحترافية</span></h2>
+
+        <div class="services">
+
+            <div class="service">
+                <div class="emoji">💻</div>
+                <h3>تطوير البرامج</h3>
+                <p>إنشاء برامج مخصصة للأفراد والشركات.</p>
+            </div>
+
+            <div class="service">
+                <div class="emoji">🌐</div>
+                <h3>تصميم المواقع</h3>
+                <p>مواقع عصرية وسريعة ومتوافقة مع الهواتف.</p>
+            </div>
+
+            <div class="service">
+                <div class="emoji">📱</div>
+                <h3>تطبيقات الهاتف</h3>
+                <p>تطوير تطبيقات حديثة وسهلة الاستخدام.</p>
+            </div>
+
+            <div class="service">
+                <div class="emoji">🛠️</div>
+                <h3>الدعم الفني</h3>
+                <p>مساعدة فنية وحلول للمشكلات البرمجية.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- التواصل -->
+
+    <section id="contact">
+        <h2 class="section-title">📞 تواصل <span>معنا</span></h2>
+
+        <div class="contact">
+            <h2>هل تريد شراء أحد برامجنا؟</h2>
+            <p>يسعدنا استقبال طلباتكم واستفساراتكم.</p>
+
+            <!-- ضع رقم الواتساب الخاص بك هنا -->
+            <a href="https://wa.me/9647700000000" target="_blank">
+                تواصل عبر واتساب
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <h3>🌿 محمد حسن | مطور برامج</h3>
+    جميع الحقوق محفوظة © 2026
+    <br>
+    تم التصميم بكل حب وإبداع 💚
+</footer>
+
+<button id="topBtn" onclick="scrollToTop()">↑</button>
+
+<script>
+
+// تسجيل الدخول
+
+function login() {
+
+    let name = document.getElementById("fullName").value.trim();
+    let username = document.getElementById("username").value.trim();
+
+    if(name === "" || username === "") {
+        document.getElementById("error").innerText =
+        "يرجى إدخال الاسم واسم المستخدم";
+        return;
+    }
+
+    localStorage.setItem("userName", name);
+    localStorage.setItem("username", username);
+
+    showWebsite();
+}
+
+function showWebsite() {
+
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("mainPage").style.display = "block";
+
+    document.querySelector(".hero h1").innerText =
+    "مرحباً بك " + localStorage.getItem("userName") + " في متجر محمد حسن";
+
+}
+
+function logout() {
+
+    localStorage.removeItem("userName");
+    localStorage.removeItem("username");
+
+    document.getElementById("loginPage").style.display = "flex";
+    document.getElementById("mainPage").style.display = "none";
+
+    toggleMenu();
+}
+
+// الاحتفاظ بتسجيل الدخول
+
+if(localStorage.getItem("userName")) {
+    showWebsite();
+}
+
+// القائمة الجانبية
+
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("active");
+}
+
+// الوضع الليلي والنهاري
+
+function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    let dark = document.body.classList.contains("dark");
+
+    document.getElementById("themeBtn").innerText =
+    dark ? "☀️" : "🌙";
+
+    localStorage.setItem("darkMode", dark);
+}
+
+if(localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark");
+    document.getElementById("themeBtn").innerText = "☀️";
+}
+
+// الساعة والتاريخ
+
+function updateTime() {
+
+    let now = new Date();
+
+    document.getElementById("clock").innerText =
+    now.toLocaleTimeString("ar-IQ");
+
+    document.getElementById("date").innerText =
+    now.toLocaleDateString("ar-IQ", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+}
+
+setInterval(updateTime,1000);
+updateTime();
+
+// زر الصعود للأعلى
+
+window.onscroll = function() {
+
+    let btn = document.getElementById("topBtn");
+
+    if(window.scrollY > 300) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+// زر الشراء
+
+function buy(product) {
+
+    let message = "مرحباً، أريد شراء: " + product;
+
+    let phone = "9647700000000";
+
+    window.open(
+        "https://wa.me/" + phone +
+        "?text=" + encodeURIComponent(message),
+        "_blank"
+    );
+}
+
+</script>
+
+</body>
+</html>
+```
